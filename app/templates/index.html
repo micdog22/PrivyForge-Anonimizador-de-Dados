@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PrivyForge — Anonimizador</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<header>
+  <div>PrivyForge — Anonimizador de Dados</div>
+  <nav><a href="/health">Health</a></nav>
+</header>
+<div class="container">
+  <div class="card">
+    <h3>Regras (JSON)</h3>
+    <form id="form" class="row">
+      <textarea id="rules" rows="12" placeholder='{"salt":"...","columns":{"email":{"strategy":"hash"},"cpf":{"strategy":"mask","show_last":2}}}'></textarea>
+      <div>
+        <label class="small">CSV</label>
+        <input id="file" type="file" accept=".csv">
+      </div>
+      <div><button id="btn">Anonimizar</button></div>
+    </form>
+    <div id="msg" class="small"></div>
+  </div>
+</div>
+<script>
+  const form = document.getElementById('form')
+  const btn = document.getElementById('btn')
+  const msg = document.getElementById('msg')
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const f = document.getElementById('file').files[0]
+    if(!f){ msg.textContent = 'Selecione um CSV.'; return }
+    const rules = document.getElementById('rules').value.trim()
+    if(!rules){ msg.textContent = 'Cole as regras JSON.'; return }
+    const fd = new FormData()
+    fd.append('file', f)
+    fd.append('rules', rules)
+    const res = await fetch('/api/anonymize', { method:'POST', body: fd })
+    if(!res.ok){ msg.textContent = 'Falha: ' + res.status; return }
+    const blob = await res.blob()
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url; a.download = 'anonimizacao.csv'; a.click()
+    URL.revokeObjectURL(url)
+    msg.textContent = 'Download gerado.'
+  })
+</script>
+</body>
+</html>
