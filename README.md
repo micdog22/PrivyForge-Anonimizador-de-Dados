@@ -1,4 +1,4 @@
-# PrivyForge — Anonimizador de Dados (CSV/JSON) com Web UI (FastAPI + Pandas)
+# PrivyForge - Anonimizador de Dados (CSV/JSON) com Web UI (FastAPI + Pandas)
 
 **PrivyForge** é um utilitário auto‑hospedado para **anonimizar** dados tabulares (CSV/JSON) com regras declarativas.
 Foquei em uma área diferente das suas integrações/bots: **privacidade & compliance** (LGPD/GDPR). Ideal para gerar
