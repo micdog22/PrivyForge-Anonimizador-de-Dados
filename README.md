@@ -10,7 +10,7 @@ datasets de desenvolvimento, compartilhamento com terceiros ou publicar amostras
 
 - **Upload** de CSV (ou JSON‑lines) e **download** do arquivo anonimizado.
 - **Regras declarativas** via JSON (hash, mask, drop, keep, randomize_number).
-- **Hash determinístico** com *salt* (SHA‑256) — reidêntico para o mesmo valor + salt.
+- **Hash determinístico** com *salt* (SHA‑256): reidêntico para o mesmo valor + salt.
 - **Máscara** configurável (últimos N, primeiros N, substituto).
 - **Randomização determinística** de números, via seed do hash (mantém faixas coerentes).
 - **Sem persistência**: nada é salvo em disco (processamento em memória).
@@ -127,7 +127,7 @@ b1a2c3d4e5f6a7b8,*********00,33,Campinas
   - `rules`: JSON das regras (string)  
   **Resposta**: CSV anonimizado (como arquivo).  
 
-- `GET /health` — simples `{"status":"ok"}`.
+- `GET /health`: simples `{"status":"ok"}`.
 
 > A interface web chama esse endpoint internamente.
 
@@ -167,4 +167,4 @@ docker compose up --build
 
 ## Licença
 
-MIT — veja `LICENSE`.
+MIT. Veja [LICENSE](LICENSE).
